@@ -12,4 +12,4 @@ namespace MODEL
         public string Number   { get; set; }
         public string Password { get; set; }
     }
-}
+} 
