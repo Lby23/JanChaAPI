@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MODEL
 {
-    public class Questionnaire //问卷表
+    public partial class Questionnaire //问卷表
     {
         public int QuesId       { get; set; }//主键
         public string Title        { get; set; }//问卷标题

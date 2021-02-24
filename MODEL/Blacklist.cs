@@ -5,7 +5,7 @@ using System.Text;
 namespace MODEL
 {
     //黑名单
-    public class Blacklist
+    public partial class Blacklist
     {
         public int Bid { get; set; }//序号
         public string Btype { get; set; }//违纪类别

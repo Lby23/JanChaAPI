@@ -5,7 +5,7 @@ using System.Text;
 namespace MODEL
 {
     //招聘管理表
-    class Recruit
+    public partial class Recruit
     {
         public int Rid { get; set; }//序号
         public string Rtype { get; set; }//种类/类别

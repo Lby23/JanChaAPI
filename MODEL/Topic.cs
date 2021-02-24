@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MODEL
 {
-    public class Topic   //问题表
+    public partial class Topic   //问题表
     {
         public int TopicId { get; set; }      //题目主键
         public string Choice  { get; set; }   //多选或单选

@@ -5,7 +5,7 @@ using System.Text;
 namespace MODEL
 {
     //投诉管理表
-    class Complain
+    public partial class Complain
     {
         public int Cid { get; set; }//序号
         public string Cnumber { get; set; }//编号; 
