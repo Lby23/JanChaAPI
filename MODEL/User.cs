@@ -2,7 +2,7 @@
 
 namespace MODEL
 {
-    public class User
+    public partial class User
     {
         public int UId		 { get; set; }
         public string UserName { get; set; }
