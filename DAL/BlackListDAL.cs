@@ -9,7 +9,7 @@ namespace DAL
     public class BlackListDAL
     {
         //获取 查看 查询 黑名单表信息
-        public List<Blacklist> GetBlacklists(string BUnit)
+        public List<Blacklist> GetBlacklists(string BUnit = null)
         {
             string strSql = $"select * from Blacklist where 1=1";
             if (BUnit != null)
@@ -24,6 +24,11 @@ namespace DAL
             string strSql = $"insert into Blacklist values('{bl.Bid}','{bl.Btype}','{bl.Bunit}','{bl.BpapersNumber}','{bl.Bmatter}','{bl.Bstate}','{bl.BUpdateTime}','{bl.PubLishPerson}')";
             return NewDBHelper.ExecuteNonQuery(strSql);
         }
-        //
+        //删除黑名单信息
+        public int DelBlacklist(int Bid)
+        {
+            string strSql = $"delete from Blacklist where Bid={Bid}";
+            return NewDBHelper.ExecuteNonQuery(strSql);
+        }
     }
 }

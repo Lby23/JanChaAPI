@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace 监察中心API.Controllers
 {
@@ -18,18 +19,27 @@ namespace 监察中心API.Controllers
         BlackListDAL blDaL = new BlackListDAL();
 
         [HttpGet]
-        [EnableCors("any")]
         //黑名单显示查询
-        public List<Blacklist> GetBlacklist(string BUnit)
+        public string GetBlacklist(string BUnit,int page,int limit)
         {
-            return blDaL.GetBlacklists(BUnit);
+            List<Blacklist> data = blDaL.GetBlacklists(BUnit);
+            int count = data.Count();
+            data = data.Skip((page - 1) * limit).Take(limit).ToList();
+            var json = JsonSerializer.Serialize(new { data = data, code = 0, count = count });
+            return json;
         }
         [HttpPost]
-        [EnableCors("any")]
         //黑名单添加
-        public int AddBlacklist(Blacklist bl)
+        public int AddBlacklist([FromBody] Blacklist bl)
         {
             return blDaL.AddBlacklist(bl);
+        }
+        [HttpDelete]
+        //删除黑名单信息
+        public int DelBlacklist(int Bid)
+        {
+             int i = blDaL.DelBlacklist(Bid);
+            return i;
         }
     }
 }
