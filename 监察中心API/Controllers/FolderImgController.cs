@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace 监察中心API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class FolderImgController : ControllerBase
     {
