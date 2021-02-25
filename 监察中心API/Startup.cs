@@ -41,6 +41,18 @@ namespace 监察中心API
                     .AllowAnyMethod();
                 });
             });
+            //允许一个或多个来源可以跨域
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("CustomCorsPolicy", policy =>
+            //    {
+            //        // 设定允许跨域的来源，有多个可以用','隔开
+            //        policy.WithOrigins("http://localhost:64502")//只允许https://localhost:5000来源允许跨域
+            //        .AllowAnyHeader()
+            //        .AllowAnyMethod()
+            //        .AllowCredentials();
+            //    });
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +69,7 @@ namespace 监察中心API
 
             //配置Cors
             app.UseCors("any");
+            //app.UseCors("CustomCorsPolicy");
 
             app.UseAuthorization();
 
