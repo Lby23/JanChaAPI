@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>C:\Users\小磊\Desktop\辅助文件\Newtonsoft.Json.dll</HintPath>
+      <HintPath>C:\Users\点豆豆\Desktop\第三方控件\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 
