@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 using DAL;
 using MODEL;
 using Microsoft.AspNetCore.Cors;
-
 namespace 监察中心API.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("any")]
     [ApiController]
     //[EnableCors("any")]
     public class QuestionnaireController : ControllerBase//问卷调查控制器
@@ -30,10 +30,11 @@ namespace 监察中心API.Controllers
         {
             return dl.QuestionnaireDelete(id);
         }
-        //[Route("Add")]
-        //public int Add(Questionnaire )
-        //{ 
-        
-        //}
+
+        [HttpPost]
+        public int Add(Questionnaire s)
+        {
+            return dl.QuestionnaireAdd(s);
+        }
     }
 }

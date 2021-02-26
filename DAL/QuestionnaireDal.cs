@@ -29,6 +29,11 @@ namespace DAL
 
         public int QuestionnaireAdd(Questionnaire s)
         {
+            s.Sno = "176384";
+            s.Snum = 5;
+            s.CreateTime = DateTime.Now;
+            s.CreatePeople = "李嘉诚";
+            s.TopicId = 1;
             string sql = $"insert into Questionnaire values('{s.Title}','{s.Sno}','{s.Qsale}',{s.Snum},'{s.CreateTime}','{s.CreatePeople}','{s.BeginMs}','{s.EndMs}',{s.TopicId})";
 
             return NewDBHelper.ExecuteNonQuery(sql);
