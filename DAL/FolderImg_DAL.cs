@@ -13,7 +13,7 @@ namespace DAL
         /// <returns></returns>
         public List<FolderImg> GetFolders()
         {
-            string sql = $"select * from FolderImg";
+            string sql = $"select * from Folder_Img";
             return NewDBHelper.GetList<FolderImg>(sql);
         }
 
@@ -24,7 +24,7 @@ namespace DAL
         /// <returns></returns>
         public int Add(FolderImg f)
         {
-            string sql = $"insert into FolderImg values({f.FolderId},'{f.Name}','{f.Countnt}',{f.Sort},{f.Status},'{f.Img}','{f.JumpUrl}','{f.CreateTime}')";
+            string sql = $"insert into Folder_Img values({f.FolderId},'{f.Name}','{f.Countnt}',{f.Sort},{f.Status},'{f.Img}','{f.JumpUrl}','{f.CreateTime}')";
             return NewDBHelper.ExecuteNonQuery(sql);
         }
 
@@ -35,7 +35,7 @@ namespace DAL
         /// <returns></returns>
         public int Alter(FolderImg f)
         {
-            string sql = $"update FolderImg set FolderId='{f.FolderId}',Name='{f.Name}',Countnt='{f.Countnt}',Sort={f.Sort},Status={f.Status},Img='{f.Img}',JumpUrl='{f.JumpUrl}',CreateTime='{f.CreateTime}' where Id={f.Id}";
+            string sql = $"update Folder_Img set FolderId='{f.FolderId}',Name='{f.Name}',Countnt='{f.Countnt}',Sort={f.Sort},Status={f.Status},Img='{f.Img}',JumpUrl='{f.JumpUrl}',CreateTime='{f.CreateTime}' where Id={f.Id}";
             return NewDBHelper.ExecuteNonQuery(sql);
         }
 
@@ -46,7 +46,7 @@ namespace DAL
         /// <returns></returns>
         public int Remove(int id)
         {
-            string sql = $"delete from FolderImg where Id={id}";
+            string sql = $"delete from Folder_Img where Id={id}";
             return NewDBHelper.ExecuteNonQuery(sql);
         }
 
@@ -57,7 +57,7 @@ namespace DAL
         /// <returns></returns>
         public List<FolderImg> GetId(int id)
         {
-            string sql = $"select * from FolderImg where Id ={id}";
+            string sql = $"select * from Folder_Img where Id ={id}";
             return NewDBHelper.GetList<FolderImg>(sql);
         }
     }
