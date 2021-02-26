@@ -8,6 +8,7 @@ namespace MODEL
     {
         public int Id { get; set; }
         public int? FolderId { get; set; }
+        public string Name { get; set; }
         public string Title { get; set; }
         public int? Sort { get; set; }
         public int? Status { get; set; }

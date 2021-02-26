@@ -23,7 +23,8 @@ namespace 监察中心API.Controllers
         public ObjectResult GetArticles(string artname="", string folname="", int status=0)
         {
             var data = dal.GetArticles(artname, folname, status);
-            return Ok(new {data=data,code=0});
+            var count = data.Count();
+            return Ok(new {data=data,code=0,count=count});
         }
 
         [HttpGet]
@@ -46,7 +47,7 @@ namespace 监察中心API.Controllers
         [HttpDelete]
         [EnableCors("any")]
         //调用dal层删除方法
-        public int Delete(int id)
+        public int Delete([FromBody]int id)
         {
             return dal.DelArticle(id);
         }
