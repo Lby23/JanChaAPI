@@ -35,7 +35,7 @@ namespace 监察中心API.Controllers
         /// <returns></returns>
         [HttpPost]
         [EnableCors("any")]
-        public ObjectResult GetFolders()
+        public ObjectResult GetFolderImgs()
         {
             var data = folderimg.GetFolders();
             return Ok(new { data = data});

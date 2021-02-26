@@ -7,6 +7,11 @@ namespace DAL
 {
     public class FolderImg_DAL
     {
+        /// <summary>
+        /// 显示
+        /// </summary>
+        /// <param name="folname"></param>
+        /// <returns></returns>
         public List<FolderImg> GetFolderImgs(string folname)
         {
             string sql = $"select a.*,b.Name from folder_img a join folder b on a.Folder_Id=b.Id where 1=1";

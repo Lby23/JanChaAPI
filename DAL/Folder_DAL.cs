@@ -6,7 +6,12 @@ namespace DAL
 {
     public class Folder_DAL
     {
-
+        /// <summary>
+        /// 显示
+        /// </summary>
+        /// <param name="folname"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
         public List<Folder> GetFolders(string folname, int status)
         {
             string sql = $"select * from Folder where 1=1";
