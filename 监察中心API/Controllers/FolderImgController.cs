@@ -26,7 +26,8 @@ namespace 监察中心API.Controllers
         public ObjectResult Index(string folname="")
         {
             var data = folderimg.GetFolderImgs(folname);
-            return Ok(new { data = data, code = 0 });
+            var count = data.Count();
+            return Ok(new { data = data, code = 0 ,count=count});
         }
 
         /// <summary>
