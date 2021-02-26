@@ -28,15 +28,6 @@ namespace 监察中心API.Controllers
             return Ok(new { data = data, code = 0 });
         }
 
-        [HttpPost]
-        [EnableCors("any")]
-        public List<Folder> Show()
-        {
-
-            var data = folder.GetFolders();
-            return data;
-        }
-
         /// <summary>
         /// 添加
         /// </summary>
