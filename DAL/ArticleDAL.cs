@@ -37,7 +37,7 @@ namespace DAL
         //文章管理添加
         public int AddArticle(Article a)
         {
-            string strSql = $"insert into article values('{a.FolderId}','{a.Title}','{a.Sort}','{a.Status}','{a.IsUp}','{a.IsComment}','{a.IsRecommend}','{a.ApproveStatus}',getdate(),'{a.StartTime}','{a.EndTime}','{a.Type}','{a.JumpUrl}','{a.Image}','{a.CreatePeople}')";
+            string strSql = $"insert into article values('{a.FolderId}','{a.Title}','{a.Sort}','{a.Status}','{a.IsUp}','{a.IsComment}','{a.IsRecommend}','1',getdate(),'{a.StartTime}','{a.EndTime}','{a.Type}','{a.JumpUrl}','{a.Image}','{a.CreatePeople}')";
             return NewDBHelper.ExecuteNonQuery(strSql);
         }
 
