@@ -22,9 +22,9 @@ namespace 监察中心API.Controllers
         /// <returns></returns>
         [HttpPost]
         [EnableCors("any")]
-        public ObjectResult Index()
+        public ObjectResult Index(string folname="",int status=0)
         {
-            var data = folder.GetFolders();
+            var data = folder.GetFolders(folname,status);
             return Ok(new { data = data, code = 0 });
         }
 

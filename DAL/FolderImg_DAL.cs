@@ -7,8 +7,19 @@ namespace DAL
 {
     public class FolderImg_DAL
     {
+        public List<FolderImg> GetFolderImgs(string folname)
+        {
+            string sql = $"select a.*,b.Name from folder_img a join folder b on a.Folder_Id=b.Id where 1=1";
+            if(!string.IsNullOrEmpty(folname))
+            {
+                sql += $" and a.Name like '%{folname}%'";
+            }
+            return NewDBHelper.GetList<FolderImg>(sql);
+        }
+
+
         /// <summary>
-        /// 显示
+        /// 下拉框
         /// </summary>
         /// <returns></returns>
         public List<FolderImg> GetFolders()
