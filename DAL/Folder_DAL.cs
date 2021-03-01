@@ -43,7 +43,7 @@ namespace DAL
         /// <returns></returns>
         public int Add(Folder f)
         {
-            string sql = $"insert into Folder values({f.ParentId},'{f.Name}','{f.Key}','{f.Path}',{f.Sort},{f.Status},{f.Type},'{f.JumpUrl}','{f.Content}')";
+            string sql = $"insert into Folder values({f.ParentId},'{f.Name}','{f.Key}','{f.Path}',{f.Sort},{f.Status},{f.Type},'{f.Jump_url}','{f.Content}')";
             return NewDBHelper.ExecuteNonQuery(sql);
         }
 
@@ -54,7 +54,7 @@ namespace DAL
         /// <returns></returns>
         public int Alter(Folder f)
         {
-            string sql = $"update Folder set Name='{f.Name}',Key='{f.Key}',Path='{f.Path}',Sort={f.Sort},Status={f.Status},JumpUrl='{f.JumpUrl}',Content='{f.Content}' where Id={f.Id}";
+            string sql = $"update Folder set Name='{f.Name}',Key='{f.Key}',Path='{f.Path}',Sort={f.Sort},Status={f.Status},JumpUrl='{f.Jump_url}',Content='{f.Content}' where Id={f.Id}";
             return NewDBHelper.ExecuteNonQuery(sql);
         }
 
