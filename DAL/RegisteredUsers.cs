@@ -38,7 +38,12 @@ namespace DAL
         }
         public int Enlt(User u)//修改
         {
-            var sql = $"update Users set UserName='{u.UserName}',UserSex='{u.UserSex}',Age={u.Age},Phone={u.Phone},Password='{u.Password}'";
+            var sql = $"update Users set UserName='{u.UserName}',UserSex='{u.UserSex}',Age={u.Age},Phone={u.Phone},Password='{u.Password}' where UId={u.UId}";
+            return NewDBHelper.ExecuteNonQuery(sql);
+        }
+        public int Add(User u)//添加
+        {
+            var sql=$"insert into Users values('{u.UserName}','{u.UserSex}',{u.Age},'{u.Phone}','{u.Number}','{u.Password}')";
             return NewDBHelper.ExecuteNonQuery(sql);
         }
     }

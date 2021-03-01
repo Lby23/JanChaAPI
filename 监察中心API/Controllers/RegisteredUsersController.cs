@@ -45,5 +45,11 @@ namespace 监察中心API.Controllers
         {
             return dal.Enlt(u);
         }
+        [HttpPost]
+        [EnableCors("any")]
+        public int Add(User u)
+        {
+            return dal.Add(u);
+        }
     }
 }

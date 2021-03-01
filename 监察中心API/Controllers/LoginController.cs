@@ -9,13 +9,13 @@ using Microsoft.AspNetCore.Cors;
 
 namespace 监察中心API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class LoginController : Controller
     {
         login lg = new login();
 
-        [HttpGet]
+        [HttpPost]
         [EnableCors("any")]
         public int Login(string Number, string Password)//登录
         {
@@ -23,7 +23,7 @@ namespace 监察中心API.Controllers
         }
         [HttpPost]
         [EnableCors("any")]
-        public int Registration(User u)//注册
+        public int Registration([FromBody]User u)//注册
         {
             return lg.Registration(u);
         }
