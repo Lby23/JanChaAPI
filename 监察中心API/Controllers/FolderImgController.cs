@@ -19,13 +19,27 @@ namespace 监察中心API.Controllers
         /// <summary>
         /// 显示
         /// </summary>
+        /// <param name="folname"></param>
         /// <returns></returns>
         [HttpPost]
         [EnableCors("any")]
-        public ObjectResult Index()
+        public ObjectResult Index(string folname="")
+        {
+            var data = folderimg.GetFolderImgs(folname);
+            var count = data.Count();
+            return Ok(new { data = data, code = 0 ,count=count});
+        }
+
+        /// <summary>
+        /// 下拉框
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [EnableCors("any")]
+        public ObjectResult GetFolderImgs()
         {
             var data = folderimg.GetFolders();
-            return Ok(new { data = data, code = 0 });
+            return Ok(new { data = data});
         }
 
         /// <summary>

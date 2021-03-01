@@ -22,19 +22,23 @@ namespace 监察中心API.Controllers
         /// <returns></returns>
         [HttpPost]
         [EnableCors("any")]
-        public ObjectResult Index()
+        public ObjectResult Index(string folname="",int status=0)
         {
-            var data = folder.GetFolders();
-            return Ok(new { data = data, code = 0 });
+            var data = folder.GetFolders(folname,status);
+            var count = data.Count();
+            return Ok(new { data = data, code = 0 ,count=count});
         }
 
+        /// <summary>
+        /// 下拉框
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [EnableCors("any")]
-        public List<Folder> Show()
+        public ObjectResult GetFolders()
         {
-
-            var data = folder.GetFolders();
-            return data;
+            var data = folder.Folders();
+            return Ok(new { data = data });
         }
 
         /// <summary>

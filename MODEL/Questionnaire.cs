@@ -9,7 +9,7 @@ namespace MODEL
         public int QuesId       { get; set; }//主键
         public string Title        { get; set; }//问卷标题
         public string Sno          { get; set; }//问卷编号
-        public bool Qsale        { get; set; }//问卷状态
+        public int Qsale        { get; set; }//问卷状态
         public int Snum         { get; set; }//回收数量
         public DateTime CreateTime   { get; set; }//创建时间
         public string CreatePeople { get; set; }//创建人
