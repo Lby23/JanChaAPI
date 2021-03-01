@@ -17,13 +17,13 @@ namespace 监察中心API.Controllers
 
         [HttpPost]
         [EnableCors("any")]
-        public int Login(string Number, string Password)//登录
+        public int Login(User data)//登录
         {
-            return lg.Login(Number,Password);
+            return lg.Login(data.Number, data.Password);
         }
         [HttpPost]
         [EnableCors("any")]
-        public int Registration([FromBody]User u)//注册
+        public int Registration([FromBody] User u)//注册
         {
             return lg.Registration(u);
         }
@@ -34,5 +34,10 @@ namespace 监察中心API.Controllers
         {
             return lg.GetUsers();
         }
+    }
+    public class aa
+    {
+        public string Number { get; set; }
+        public string Password { get; set; }
     }
 }

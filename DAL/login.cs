@@ -20,7 +20,7 @@ namespace DAL
         }
         public int Registration(User u)
         {
-            string sql = $"insert into Users values('{u.UserName}','{u.UserSex}','{u.Age}','{u.Time1}','{u.Phone}','{u.Emile}','{u.Note}','{u.Number}','{u.Password}')";
+            string sql = $"insert into Users values('{u.UserName}','{u.UserSex}','{u.Age}',GETDATE(),'{u.Phone}','{u.Emile}','{u.Note}','{u.Number}','{u.Password}')";
             return NewDBHelper.ExecuteNonQuery(sql);
         }
 
