@@ -12,7 +12,7 @@ namespace DAL
         /// <param name="folname"></param>
         /// <param name="status"></param>
         /// <returns></returns>
-        public List<Folder> GetFolders(string folname, int status)
+        public List<Folder> GetFolders(string folname, int status, int page, int limit)
         {
             string sql = $"select * from Folder where 1=1";
             if (!string.IsNullOrEmpty(folname))
