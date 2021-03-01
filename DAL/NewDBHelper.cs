@@ -17,7 +17,7 @@ namespace DAL
         public static SqlConnection getConn()
         {
             //数据库连接字符串
-            string connStr = "Data Source=.;Initial Catalog=Register;Integrated Security=True";
+            string connStr = "Data Source=GAOLEI\\SQLEXPRESS;Initial Catalog=Register;Integrated Security=True";
             return new SqlConnection(connStr);
         }
         /// <summary>

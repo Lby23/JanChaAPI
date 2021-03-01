@@ -11,18 +11,18 @@ namespace DAL
         public List<Article> GetArticles(int artname, string folname, int status,int page,int limit)
         {
             string strSql = "select article.*,folder.Name from article join folder on article.FolderId =folder.Id";
-            strSql += " and 1=1";
+            strSql += " where 1=1";
             if (artname != 0)
             {
-                strSql += $"where article.folderId = '{artname}'";
+                strSql += $"and article.folderId = '{artname}'";
             }
             if (!string.IsNullOrEmpty(folname))
             {
-                strSql += $"where article.Title like '%{folname}%'";
+                strSql += $"and article.Title like '%{folname}%'";
             }
             if (status != 0)
             {
-                strSql += $"where article.Status = '{status}'";
+                strSql += $"and article.Status = '{status}'";
             }
             return NewDBHelper.GetList<Article>(strSql);
         }
