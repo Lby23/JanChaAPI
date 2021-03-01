@@ -27,5 +27,12 @@ namespace 监察中心API.Controllers
         {
             return lg.Registration(u);
         }
+
+        [HttpGet]
+        [EnableCors("any")]
+        public List<User> GetUsers()
+        {
+            return lg.GetUsers();
+        }
     }
 }

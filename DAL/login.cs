@@ -9,29 +9,25 @@ namespace DAL
     {
         public int Login(string Number,string Password)//登录
         {
-            string sql = $"select * from Users where 1=1";
-            if (!string.IsNullOrEmpty(Number))
-            {
-                sql += $" and Number='{Number}'";
-            }
-            if (!string.IsNullOrEmpty(Password))
-            {
-                sql += $" and password='{Password}'";
-            }
-            var str= NewDBHelper.GetList<User>(sql);
-            if (str!=null)
+            string sql = $"select * from Users where Number='{Number}' and Password='{Password}'";
+            var data= NewDBHelper.GetList<User>(sql);
+            if (data.Count!=0)
             {
                 return 1;
             }
-            else
-            {
-                return 0;
-            }
+            return 0;
+            
         }
         public int Registration(User u)
         {
-            string sql = $"insert into Users values('{u.UserName}','{u.UserSex}','{u.Age}','{u.Phone}','{u.Emile}','{u.Note}','{u.Number}','{u.Password}')";
+            string sql = $"insert into Users values('{u.UserName}','{u.UserSex}','{u.Age}','{u.Time1}','{u.Phone}','{u.Emile}','{u.Note}','{u.Number}','{u.Password}')";
             return NewDBHelper.ExecuteNonQuery(sql);
+        }
+
+        public List<User> GetUsers()
+        {
+            string sql = $"select * from User";
+            return NewDBHelper.GetList<User>(sql);
         }
     }
 }
