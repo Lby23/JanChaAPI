@@ -35,9 +35,4 @@ namespace 监察中心API.Controllers
             return lg.GetUsers();
         }
     }
-    public class aa
-    {
-        public string Number { get; set; }
-        public string Password { get; set; }
-    }
 }
