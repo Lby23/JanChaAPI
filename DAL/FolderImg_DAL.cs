@@ -12,7 +12,7 @@ namespace DAL
         /// </summary>
         /// <param name="folname"></param>
         /// <returns></returns>
-        public List<FolderImg> GetFolderImgs(string folname)
+        public List<FolderImg> GetFolderImgs(string folname, int page, int limit)
         {
             string sql = $"select a.*,b.Name from folder_img a join folder b on a.Folder_Id=b.Id where 1=1";
             if(!string.IsNullOrEmpty(folname))
