@@ -9,8 +9,28 @@ namespace DAL
         /// <summary>
         /// 显示
         /// </summary>
+        /// <param name="folname"></param>
+        /// <param name="status"></param>
         /// <returns></returns>
-        public List<Folder> GetFolders()
+        public List<Folder> GetFolders(string folname, int status, int page, int limit)
+        {
+            string sql = $"select * from Folder where 1=1";
+            if (!string.IsNullOrEmpty(folname))
+            {
+                sql += $" and Name like '%{folname}%' ";
+            }
+            if (status != 0)
+            {
+                sql += $" and Status = '{status}' ";
+            }
+            return NewDBHelper.GetList<Folder>(sql);
+        }
+
+        /// <summary>
+        /// 下拉框
+        /// </summary>
+        /// <returns></returns>
+        public List<Folder> Folders()
         {
             string sql = $"select * from Folder";
             return NewDBHelper.GetList<Folder>(sql);
