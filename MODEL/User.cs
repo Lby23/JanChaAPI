@@ -28,7 +28,7 @@ namespace MODEL
         public string Phone	 { get; set; }//手机号
 
         [Display(Name = "电子邮件")]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "邮件格式不正确")]
+        //[RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "邮件格式不正确")]
         public int Emile { get; set; }//电子邮件
 
         [Display(Name = "备注")]
