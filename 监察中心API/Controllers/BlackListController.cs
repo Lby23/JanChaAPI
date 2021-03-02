@@ -30,15 +30,23 @@ namespace 监察中心API.Controllers
         }
         [HttpPost]
         //黑名单添加
-        public int AddBlacklist([FromBody] Blacklist bl)
+        public int AddBlacklist(Blacklist bl)
         {
-            return blDaL.AddBlacklist(bl);
+            int i = blDaL.AddBlacklist(bl);
+            return i;
         }
         [HttpDelete]
         //删除黑名单信息
         public int DelBlacklist(int Bid)
         {
-             int i = blDaL.DelBlacklist(Bid);
+            int i = blDaL.DelBlacklist(Bid);
+            return i;
+        }
+        [HttpPut]
+        //修改黑名单信息
+        public int UpdateBlacklist(Blacklist bl)
+        {
+            int i = blDaL.UpdateBlacklist(bl);
             return i;
         }
     }
