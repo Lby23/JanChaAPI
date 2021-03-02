@@ -9,6 +9,11 @@ using Microsoft.AspNetCore.Cors;
 
 namespace 监察中心API.Controllers
 {
+    public class Log
+    {
+        public string Number { get; set; }
+        public string Password { get; set; }
+    }
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class LoginController : Controller
@@ -17,7 +22,7 @@ namespace 监察中心API.Controllers
 
         [HttpPost]
         [EnableCors("any")]
-        public int Login(User data)//登录
+        public int Login(Log data)//登录
         {
             return lg.Login(data.Number, data.Password);
         }
@@ -34,5 +39,7 @@ namespace 监察中心API.Controllers
         {
             return lg.GetUsers();
         }
+
     }
+    
 }
