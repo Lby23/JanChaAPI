@@ -26,7 +26,7 @@ namespace DAL
 
         public List<User> GetUsers()
         {
-            string sql = $"select * from User";
+            string sql = $"select * from Users";
             return NewDBHelper.GetList<User>(sql);
         }
     }
