@@ -18,11 +18,12 @@ namespace 监察中心API.Controllers
     {
         QuestionnaireDal dl = new QuestionnaireDal();
         [HttpGet]
-        public ObjectResult GetAction(int page = 1, int limit = 3, string title = null)
+        public ObjectResult GetAction(int page, int limit, string title = null)
         {
             List<Questionnaire> St = dl.GetQuestionnaires(page, limit, title);
             int total = dl.GetQuestionnaires(page, limit, title).Count();
-            return Ok(new { code = 0, msg = "", count = total, data = St, page = page, limit = limit });
+            St = St.Skip((page - 1) * limit).Take(limit).ToList();
+            return Ok(new { code = 0, msg = "", count = total, data = St});
         }
         [Route("delete")]
         [HttpDelete]
@@ -35,6 +36,13 @@ namespace 监察中心API.Controllers
         public int Add(Questionnaire s)
         {
             return dl.QuestionnaireAdd(s);
+        }
+
+        [HttpPost]
+        [Route("edit")]
+        public int Edit(Questionnaire s)
+        {
+            return dl.QuestionnaireEdit(s);
         }
     }
 }
