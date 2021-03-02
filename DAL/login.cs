@@ -7,16 +7,10 @@ namespace DAL
 {
     public class login
     {
-        public int Login(string Number,string Password)//登录
+        public List<User> Login(string number, string pass)//登录
         {
-            string sql = $"select * from Users where Number='{Number}' and Password='{Password}'";
-            var data= NewDBHelper.GetList<User>(sql);
-            if (data.Count!=0)
-            {
-                return 1;
-            }
-            return 0;
-            
+            string sql = $"select * from Users where Number='{number}' and Password='{pass}'";
+            return NewDBHelper.GetList<User>(sql);            
         }
         public int Registration(User u)
         {

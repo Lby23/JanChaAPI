@@ -20,11 +20,12 @@ namespace 监察中心API.Controllers
     {
         login lg = new login();
 
-        [HttpPost]
+        [HttpGet]
         [EnableCors("any")]
-        public int Login(Log data)//登录
+        public ObjectResult Login(string Number = "",string Password = "")//登录
         {
-            return lg.Login(data.Number, data.Password);
+            var data = lg.Login(Number, Password);
+            return Ok(data);
         }
         [HttpPost]
         [EnableCors("any")]
