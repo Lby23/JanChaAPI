@@ -20,10 +20,13 @@ namespace 监察中心API.Controllers
         [HttpGet]
         [EnableCors("any")]
         //调用dal层显示方法
-        public ObjectResult GetArticles(string artname="", string folname="", int status=0)
+        public ObjectResult GetArticles(int page,int limit,int artname=0, string folname="", int status=0)
         {
-            var data = dal.GetArticles(artname, folname, status);
+            var data = dal.GetArticles(artname, folname, status,page,limit);
             var count = data.Count();
+            data = data.Skip((page - 1) * limit)
+                .Take(limit)
+                .ToList();
             return Ok(new {data=data,code=0,count=count});
         }
 
@@ -52,7 +55,7 @@ namespace 监察中心API.Controllers
             return dal.DelArticle(id);
         }
 
-        [HttpPost]
+        [HttpPut]
         [EnableCors("any")]
         //调用dal层修改方法
         public int Update(Article a)
