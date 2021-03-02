@@ -23,12 +23,12 @@ namespace 监察中心API.Controllers
         /// <returns></returns>
         [HttpPost]
         [EnableCors("any")]
-        public ObjectResult Index(int page, int limit, string folname="")
+        public ObjectResult Index(int page = 1, int limit = 5, string folname = "")
         {
-            var data = folderimg.GetFolderImgs(folname,page,limit);
+            var data = folderimg.GetFolderImgs(folname, page, limit);
             var count = data.Count();
             data = data.Skip((page - 1) * limit).Take(limit).ToList();
-            return Ok(new { data = data, code = 0 ,count=count});
+            return Ok(new { data = data, code = 0, count = count });
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace 监察中心API.Controllers
         public ObjectResult GetFolderImgs()
         {
             var data = folderimg.GetFolders();
-            return Ok(new { data = data});
+            return Ok(new { data = data });
         }
 
         /// <summary>
