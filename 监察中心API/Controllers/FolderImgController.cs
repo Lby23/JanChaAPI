@@ -36,7 +36,7 @@ namespace 监察中心API.Controllers
         /// 下拉框
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [EnableCors("any")]
         public ObjectResult GetFolderImgs()
         {
@@ -62,7 +62,7 @@ namespace 监察中心API.Controllers
         /// </summary>
         /// <param name="f"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPut]
         [EnableCors("any")]
         public int Alter(FolderImg f)
         {
