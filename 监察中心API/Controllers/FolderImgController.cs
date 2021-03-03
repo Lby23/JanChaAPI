@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using MODEL;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@ namespace 监察中心API.Controllers
         /// </summary>
         /// <param name="folname"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [EnableCors("any")]
         public ObjectResult Index(int page = 1, int limit = 5, string folname = "")
         {
@@ -94,5 +95,36 @@ namespace 监察中心API.Controllers
             var code = folderimg.GetId(id);
             return code;
         }
+
+
+        [HttpPost]
+        [EnableCors("any")]
+        public object InsertPicture([FromForm] IFormCollection formData)
+        {
+            IFormFile uploadfile = formData.Files[0];
+            if (uploadfile != null)
+            {
+                //文件后缀
+                var fileExtension = Path.GetExtension(uploadfile.FileName);
+                var strDateTime = DateTime.Now.ToString("yyMMddhhmmssfff"); //取得时间字符串
+                var strRan = Convert.ToString(new Random().Next(100, 999)); //生成三位随机数
+                var saveName = strDateTime + strRan + fileExtension;
+                var path = "image";
+                var di = ("/" + path + "/" + saveName);
+                var bi = Path.Combine("wwwroot", path);
+                if (!Directory.Exists(bi))
+                {
+                    Directory.CreateDirectory(bi);
+                }
+                using (FileStream fs = System.IO.File.Create(Path.Combine(bi, saveName)))
+                {
+                    uploadfile.CopyTo(fs);
+                    fs.Flush();
+                }
+                return new { code = 0, path = di };
+            }
+            return new { code = 1 };
+        }
+
     }
 }
