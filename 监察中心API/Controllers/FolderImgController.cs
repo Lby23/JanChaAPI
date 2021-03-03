@@ -96,35 +96,5 @@ namespace 监察中心API.Controllers
             return code;
         }
 
-
-        //[HttpPost]
-        //[EnableCors("any")]
-        //public object InsertPicture([FromForm] IFormCollection formData)
-        //{
-        //    IFormFile uploadfile = formData.Files[0];
-        //    if (uploadfile != null)
-        //    {
-        //        //文件后缀
-        //        var fileExtension = Path.GetExtension(uploadfile.FileName);
-        //        var strDateTime = DateTime.Now.ToString("yyMMddhhmmssfff"); //取得时间字符串
-        //        var strRan = Convert.ToString(new Random().Next(100, 999)); //生成三位随机数
-        //        var saveName = strDateTime + strRan + fileExtension;
-        //        var path = "image";
-        //        var di = ("/" + path + "/" + saveName);
-        //        var bi = Path.Combine("wwwroot", path);
-        //        if (!Directory.Exists(bi))
-        //        {
-        //            Directory.CreateDirectory(bi);
-        //        }
-        //        using (FileStream fs = System.IO.File.Create(Path.Combine(bi, saveName)))
-        //        {
-        //            uploadfile.CopyTo(fs);
-        //            fs.Flush();
-        //        }
-        //        return new { code = 0, path = di };
-        //    }
-        //    return new { code = 1 };
-        //}
-
     }
 }
