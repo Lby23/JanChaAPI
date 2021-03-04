@@ -15,9 +15,9 @@ namespace DAL
         {
             SqlParameter[] par = {
             new SqlParameter{ ParameterName="@Index",DbType=DbType.Int32,Value=page},
-            new SqlParameter{ ParameterName="@Size",DbType=DbType.Int32,Value=page},
-            new SqlParameter{ ParameterName="@UserName",DbType=DbType.String,Value=page},
-            new SqlParameter{ ParameterName="@Number",DbType=DbType.String,Value=page},
+            new SqlParameter{ ParameterName="@Size",DbType=DbType.Int32,Value=limit},
+            new SqlParameter{ ParameterName="@UserName",DbType=DbType.String,Value=UserName},
+            new SqlParameter{ ParameterName="@Number",DbType=DbType.String,Value=Number},
             new SqlParameter{ ParameterName="@totalCount",Direction= ParameterDirection.Output,DbType= DbType.Int32}
             };
             DataTable tab = NewDBHelper.GetTable("Pro_name", CommandType.StoredProcedure, par);
