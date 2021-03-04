@@ -20,7 +20,7 @@ namespace 监察中心API.Controllers
         /// 显示
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [EnableCors("any")]
         public ObjectResult Index(int page=1,int limit=5,string folname="",int status=0)
         {
@@ -34,7 +34,7 @@ namespace 监察中心API.Controllers
         /// 下拉框
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [EnableCors("any")]
         public ObjectResult GetFolders()
         {
@@ -60,7 +60,7 @@ namespace 监察中心API.Controllers
         /// </summary>
         /// <param name="f"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPut]
         [EnableCors("any")]
         public int Alter(Folder f)
         {
