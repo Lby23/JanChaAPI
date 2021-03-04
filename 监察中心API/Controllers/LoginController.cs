@@ -33,6 +33,13 @@ namespace 监察中心API.Controllers
 
         
 
+        [HttpPut]
+        [EnableCors("any")]
+        public int Update(User u)
+        {
+            return lg.Updatepass(u);
+        }
+
     }
     
 }
