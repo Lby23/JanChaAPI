@@ -41,6 +41,13 @@ namespace 监察中心API.Controllers
             return lg.GetUsers();
         }
 
+        [HttpPut]
+        [EnableCors("any")]
+        public int Update(User u)
+        {
+            return lg.Updatepass(u);
+        }
+
     }
     
 }

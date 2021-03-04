@@ -22,12 +22,9 @@ namespace 监察中心API.Controllers
         //调用dal层显示方法
         public ObjectResult GetArticles(int page,int limit,int artname=0, string folname="", int status=0)
         {
-            var data = dal.GetArticles(artname, folname, status,page,limit);
-            var count = data.Count();
-            data = data.Skip((page - 1) * limit)
-                .Take(limit)
-                .ToList();
-            return Ok(new {data=data,code=0,count=count});
+            int total;
+            var data = dal.GetArticles(artname, folname, status,page,limit,out total);
+            return Ok(new {data=data,code=0,count=total});
         }
 
         [HttpGet]

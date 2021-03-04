@@ -23,5 +23,11 @@ namespace DAL
             string sql = $"select * from Users";
             return NewDBHelper.GetList<User>(sql);
         }
+
+        public int Updatepass(User u)
+        {
+            string sql = $"update Users set UserName='{u.UserName}', Password ='{u.Password}',Emile='{u.Emile}',Phone='{u.Phone}',note='{u.Note}',where UId='{u.UId}'";
+            return NewDBHelper.ExecuteNonQuery(sql);
+        }
     }
 }
