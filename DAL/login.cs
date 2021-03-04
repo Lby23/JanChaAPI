@@ -16,8 +16,7 @@ namespace DAL
             SqlParameter[] a = {
                 new SqlParameter { ParameterName= "@Number",DbType= DbType.String,Value= Number },
                 new SqlParameter { ParameterName= "@Password",DbType= DbType.String,Value= Password }
-                                };
-
+                                }; 
             return NewDBHelper.GetList<User>(sql, CommandType.Text, a);
         }
         public int Registration(User u)
