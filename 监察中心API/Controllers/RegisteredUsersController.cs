@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DAL;
 using MODEL;
 using Microsoft.AspNetCore.Cors;
+using System.Data.SqlClient;
 
 namespace 监察中心API.Controllers
 {
@@ -17,10 +18,11 @@ namespace 监察中心API.Controllers
 
         [HttpGet]
         [EnableCors("any")]
-        public ObjectResult GetUsers(int page=1, int limit=5, string UserName=null, string Number=null)//显示注册的人员和查找人员
+        public ObjectResult GetUsers(int page=1, int limit=3, string UserName=null, string Number=null)//显示注册的人员和查找人员
         {
-            var str= dal.GetUsers(page, limit,UserName,Number);
-            int total = str.Count(); 
+            int total;
+            var str= dal.GetUsers(page, limit,UserName,Number,out total);
+
             return Ok(new { code = 0, msg = "", count = total, data = str, page = page, limit = limit });
         }
 

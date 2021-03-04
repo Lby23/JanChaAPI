@@ -9,11 +9,7 @@ using Microsoft.AspNetCore.Cors;
 
 namespace 监察中心API.Controllers
 {
-    public class Log
-    {
-        public string Number { get; set; }
-        public string Password { get; set; }
-    }
+    
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class LoginController : Controller
@@ -22,10 +18,11 @@ namespace 监察中心API.Controllers
 
         [HttpGet]
         [EnableCors("any")]
-        public ObjectResult Login(string Number = "",string Password = "")//登录
+        public ObjectResult Login(string Number="",string Password="")//登录
         {
-            var data = lg.Login(Number, Password);
-            return Ok(data);
+            string str = "";
+            str = lg.GetMd5String(Password);
+            return Ok(lg.Login(Number,str));
         }
         [HttpPost]
         [EnableCors("any")]
@@ -34,12 +31,7 @@ namespace 监察中心API.Controllers
             return lg.Registration(u);
         }
 
-        [HttpGet]
-        [EnableCors("any")]
-        public List<User> GetUsers()
-        {
-            return lg.GetUsers();
-        }
+        
 
         [HttpPut]
         [EnableCors("any")]
