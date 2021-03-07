@@ -32,24 +32,48 @@ namespace DAL
             var sql = $"select * from Users where 1=1";
             if (UId!=0)
             {
-                sql += $" and UId={UId}";
+                sql += $" and UId=@UId";
             }
-            return NewDBHelper.GetList<User>(sql);
+            SqlParameter[] a={ 
+            new SqlParameter {ParameterName="@UId",DbType=DbType.Int32,Value=UId}
+            };
+            return NewDBHelper.GetList<User>(sql,CommandType.StoredProcedure,a);
         }
         public int Delete(int UId)//删除
         {
-            var sql = $"delete from Users where UId={UId}";
-            return NewDBHelper.ExecuteNonQuery(sql);
+            var sql = $"delete from Users where UId=@UId";
+            SqlParameter[] a = { 
+            new SqlParameter{ ParameterName="@UId",DbType=DbType.Int32,Value=UId},
+            };
+            return NewDBHelper.ExecuteNonQuery(sql,CommandType.StoredProcedure,a);
         }
         public int Enlt(User u)//修改
         {
-            var sql = $"update Users set UserName='{u.UserName}',UserSex='{u.UserSex}',Age={u.Age},Phone={u.Phone},Password='{u.Password}' where UId={u.UId}";
-            return NewDBHelper.ExecuteNonQuery(sql);
+            string sql = $"update Users set UserName=@UserName,UserSex=@UserSex,Age=@AgePassword =@Password,Phone=@Phone where UId=@UId";
+            SqlParameter[] a = {
+            new SqlParameter{ ParameterName="@UId",DbType=DbType.Int32,Value=u.UId},
+            new SqlParameter{ ParameterName="@UserName",DbType=DbType.String,Value=u.UserName},
+            new SqlParameter{ ParameterName="@Time1",DbType=DbType.DateTime,Value=u.Time1=DateTime.Now},
+            new SqlParameter{ ParameterName="@Phone",DbType=DbType.String,Value=u.Phone}, 
+            new SqlParameter{ ParameterName="@Number",DbType=DbType.String,Value=u.Number},
+             new SqlParameter{ ParameterName="@Password",DbType=DbType.String,Value=u.Password}
+            };
+            return NewDBHelper.ExecuteNonQuery(sql, CommandType.Text, a);
         }
         public int Add(User u)//添加
         {
-            var sql=$"insert into Users values('{u.UserName}','{u.UserSex}',{u.Age},'{u.Phone}','{u.Number}','{u.Password}')";
-            return NewDBHelper.ExecuteNonQuery(sql);
+            string sql = $"insert into Users values(@UserName,@UserSex,@Age,@Time1,@Phone,@Note,@Number,@Password)";
+            SqlParameter[] a = {
+            new SqlParameter{ ParameterName="@UserName",DbType=DbType.String,Value=u.UserName},
+            new SqlParameter{ ParameterName="@UserSex",DbType=DbType.Boolean,Value=u.UserSex},
+            new SqlParameter{ ParameterName="@Age",DbType=DbType.Int32,Value=u.Age},
+            new SqlParameter{ ParameterName="@Time1",DbType=DbType.DateTime,Value=u.Time1=DateTime.Now},
+            new SqlParameter{ ParameterName="@Phone",DbType=DbType.String,Value=u.Phone},
+            new SqlParameter{ ParameterName="@Note",DbType=DbType.String,Value=u.Note},
+            new SqlParameter{ ParameterName="@Number",DbType=DbType.String,Value=u.Number},
+             new SqlParameter{ ParameterName="@Password",DbType=DbType.String,Value=u.Password}
+            };
+            return NewDBHelper.ExecuteNonQuery(sql, CommandType.Text, a);
         }
     }
 }
