@@ -22,12 +22,11 @@ namespace 监察中心API.Controllers
         /// <returns></returns>
         [HttpGet]
         [EnableCors("any")]
-        public ObjectResult Index(int page=1,int limit=5,string folname="",int status=0)
+        public ObjectResult Index(int page,int limit,string folname="",int status=0)
         {
-            var data = folder.GetFolders(folname,status,page,limit);
-            var count = data.Count();
-            data = data.Skip((page - 1) * limit).Take(limit).ToList();
-            return Ok(new { data = data, code = 0 ,count=count});
+            int total;
+            var data = folder.GetFolders( folname, status, page, limit, out total);
+            return Ok(new { data = data, code = 0 ,count=total});
         }
 
         /// <summary>
