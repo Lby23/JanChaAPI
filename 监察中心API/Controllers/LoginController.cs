@@ -18,16 +18,16 @@ namespace 监察中心API.Controllers
 
         [HttpGet]
         [EnableCors("any")]
-        public ObjectResult Login(string Number="",string Password="")//登录
+        public ObjectResult Login(string Number,string Password)//登录
         {
-            string str = "";
-            str = lg.GetMd5String(Password);
+            string str = lg.GetMd5String(Password);
             return Ok(lg.Login(Number,str));
         }
         [HttpPost]
         [EnableCors("any")]
         public int Registration([FromBody] User u)//注册
         {
+            u.Password = lg.GetMd5String(u.Password);
             return lg.Registration(u);
         }
 

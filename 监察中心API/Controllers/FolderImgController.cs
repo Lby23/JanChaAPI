@@ -24,12 +24,11 @@ namespace 监察中心API.Controllers
         /// <returns></returns>
         [HttpGet]
         [EnableCors("any")]
-        public ObjectResult Index(int page = 1, int limit = 5, string folname = "")
+        public ObjectResult Index(int page , int limit , int status)
         {
-            var data = folderimg.GetFolderImgs(folname, page, limit);
-            var count = data.Count();
-            data = data.Skip((page - 1) * limit).Take(limit).ToList();
-            return Ok(new { data = data, code = 0, count = count });
+            int total;
+            var data = folderimg.GetFolderImgs(status, page, limit,out total);
+            return Ok(new { data = data, code = 0, count = total });
         }
 
         /// <summary>
