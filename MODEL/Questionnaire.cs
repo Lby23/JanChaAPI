@@ -15,6 +15,5 @@ namespace MODEL
         public string CreatePeople { get; set; }//创建人
         public string BeginMs      { get; set; }//开始描述
         public string EndMs        { get; set; }//结束描述
-        public int TopicId { get; set; }     //--问卷表外键关联问题表
     }
 }
