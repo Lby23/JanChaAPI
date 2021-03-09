@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using MODEL;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,21 +22,20 @@ namespace 监察中心API.Controllers
         /// </summary>
         /// <param name="folname"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [EnableCors("any")]
-        public ObjectResult Index(int page = 1, int limit = 5, string folname = "")
+        public ObjectResult Index(int page = 1, int limit = 5, int status = 0)
         {
-            var data = folderimg.GetFolderImgs(folname, page, limit);
-            var count = data.Count();
-            data = data.Skip((page - 1) * limit).Take(limit).ToList();
-            return Ok(new { data = data, code = 0, count = count });
+            int total;
+            var data = folderimg.GetFolderImgs(status, page, limit, out total);
+            return Ok(new { data = data, code = 0, count = total });
         }
 
         /// <summary>
         /// 下拉框
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [EnableCors("any")]
         public ObjectResult GetFolderImgs()
         {
@@ -52,6 +52,7 @@ namespace 监察中心API.Controllers
         [EnableCors("any")]
         public int Add(FolderImg f)
         {
+            f.CreateTime = DateTime.Now;
             var code = folderimg.Add(f);
             return code == 1 ? 1 : 0;
         }
@@ -61,7 +62,7 @@ namespace 监察中心API.Controllers
         /// </summary>
         /// <param name="f"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPut]
         [EnableCors("any")]
         public int Alter(FolderImg f)
         {
@@ -94,5 +95,6 @@ namespace 监察中心API.Controllers
             var code = folderimg.GetId(id);
             return code;
         }
+
     }
 }

@@ -9,30 +9,37 @@ using Microsoft.AspNetCore.Cors;
 
 namespace 监察中心API.Controllers
 {
+    
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class LoginController : Controller
     {
         login lg = new login();
 
-        [HttpPost]
+        [HttpGet]
         [EnableCors("any")]
-        public int Login(User data)//登录
+        public ObjectResult Login(string Number,string Password)//登录
         {
-            return lg.Login(data.Number, data.Password);
+            string str = lg.GetMd5String(Password);
+            return Ok(lg.Login(Number,str));
         }
         [HttpPost]
         [EnableCors("any")]
         public int Registration([FromBody] User u)//注册
         {
+            u.Password = lg.GetMd5String(u.Password);
             return lg.Registration(u);
         }
 
-        [HttpGet]
+        
+
+        [HttpPut]
         [EnableCors("any")]
-        public List<User> GetUsers()
+        public int Update(User u)
         {
-            return lg.GetUsers();
+            return lg.Updatepass(u);
         }
+
     }
+    
 }
