@@ -11,7 +11,7 @@ using System.Text.Json;
 
 namespace 监察中心API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class BlackListController : ControllerBase
     {
@@ -19,26 +19,47 @@ namespace 监察中心API.Controllers
         BlackListDAL blDaL = new BlackListDAL();
 
         [HttpGet]
-        //黑名单显示查询
-        public string GetBlacklist(string BUnit,int page,int limit)
+        public int GetBlacklists_front(string Bunit, string BpapersNumber)
         {
-            List<Blacklist> data = blDaL.GetBlacklists(BUnit);
-            int count = data.Count();
-            data = data.Skip((page - 1) * limit).Take(limit).ToList();
-            var json = JsonSerializer.Serialize(new { data = data, code = 0, count = count });
-            return json;
+            List<Blacklist> data = blDaL.GetBlacklists_front(Bunit, BpapersNumber);
+            int i = data.Count();
+            return i;
+        }
+        [HttpGet]
+        public int GetBlacklists_onePerson(string Bunit, string BpapersNumber)
+        {
+            List<Blacklist> data = blDaL.GetBlacklists_onePerson(Bunit, BpapersNumber);
+            int i = data.Count();
+            return i;
+        }
+
+        [HttpGet]
+        //黑名单显示查询
+        public ObjectResult GetBlacklist(int page, int limit, string BUnit = null)
+        {
+            int total;
+            List<Blacklist> data = blDaL.GetBlacklists_page(page, limit, out total, BUnit);
+            return Ok(new { data = data, code = 0, count = total });
         }
         [HttpPost]
         //黑名单添加
-        public int AddBlacklist([FromBody] Blacklist bl)
+        public int AddBlacklist(Blacklist bl)
         {
-            return blDaL.AddBlacklist(bl);
+            int i = blDaL.AddBlacklist(bl);
+            return i;
         }
         [HttpDelete]
         //删除黑名单信息
         public int DelBlacklist(int Bid)
         {
-             int i = blDaL.DelBlacklist(Bid);
+            int i = blDaL.DelBlacklist(Bid);
+            return i;
+        }
+        [HttpPut]
+        //修改黑名单信息
+        public int UpdateBlacklist(Blacklist bl)
+        {
+            int i = blDaL.UpdateBlacklist(bl);
             return i;
         }
     }

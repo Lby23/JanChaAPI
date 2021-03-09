@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using Newtonsoft.Json;
 using MODEL;
 
 namespace DAL
@@ -8,23 +11,24 @@ namespace DAL
     public class ArticleDAL
     {
         //文章管理查询显示
-        public List<Article> GetArticles(int artname, string folname, int status,int page,int limit)
+        public List<Article> GetArticles(int artname, string folname, int status,int page,int limit,out int total)
         {
-            string strSql = "select article.*,folder.Name from article join folder on article.FolderId =folder.Id";
-            strSql += " where 1=1";
-            if (artname != 0)
-            {
-                strSql += $"and article.folderId = '{artname}'";
-            }
-            if (!string.IsNullOrEmpty(folname))
-            {
-                strSql += $"and article.Title like '%{folname}%'";
-            }
-            if (status != 0)
-            {
-                strSql += $"and article.Status = '{status}'";
-            }
-            return NewDBHelper.GetList<Article>(strSql);
+            SqlParameter[] paras =
+                {
+                new SqlParameter("@pageIndex",page),
+                new SqlParameter("@PageSize",limit),
+                new SqlParameter("@Artname",artname),
+                new SqlParameter("@folname",folname),
+                new SqlParameter("@status",status),
+                new SqlParameter("@TotalCount",SqlDbType.Int),
+            };
+            paras[5].Direction = ParameterDirection.Output;
+            DataTable dt = NewDBHelper.GetTable("p_page_article", CommandType.StoredProcedure, paras);
+            
+            total = Convert.ToInt32(paras[5].Value);
+            string json = JsonConvert.SerializeObject(dt);
+            var list = JsonConvert.DeserializeObject<List<Article>>(json);
+            return list;
         }
 
         //栏目绑定下拉框

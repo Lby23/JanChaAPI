@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Text;
 using MODEL;
+using Newtonsoft.Json;
 
 namespace DAL
 {
@@ -12,14 +15,22 @@ namespace DAL
         /// </summary>
         /// <param name="folname"></param>
         /// <returns></returns>
-        public List<FolderImg> GetFolderImgs(string folname, int page, int limit)
+        public List<FolderImg> GetFolderImgs(int status, int page, int limit, out int total)
         {
-            string sql = $"select a.*,b.Name from folder_img a join folder b on a.Folder_Id=b.Id where 1=1";
-            if(!string.IsNullOrEmpty(folname))
-            {
-                sql += $" and a.Name like '%{folname}%'";
-            }
-            return NewDBHelper.GetList<FolderImg>(sql);
+            SqlParameter[] paras =
+                {
+                new SqlParameter("@pageIndex",page),
+                new SqlParameter("@PageSize",limit),
+                new SqlParameter("@status",status),
+                new SqlParameter("@TotalCount",SqlDbType.Int),
+            };
+            paras[3].Direction = ParameterDirection.Output;
+            DataTable dt = NewDBHelper.GetTable("p_folderimg", CommandType.StoredProcedure, paras);
+
+            total = Convert.ToInt32(paras[3].Value);
+            string json = JsonConvert.SerializeObject(dt);
+            var list = JsonConvert.DeserializeObject<List<FolderImg>>(json);
+            return list;
         }
 
 
