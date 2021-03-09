@@ -99,7 +99,7 @@ namespace DAL
             string strSql = $"insert into Complain values(@Cnumber,@Ctype,@Crole,@Cname,@Cphone,@WeChat,@Cemail,@ComplainPerson,@Caccessory,@Cstate,@ComplainTime,@CdisposePerson)";
             SqlParameter[] para = new SqlParameter[]
             {
-                new SqlParameter{ ParameterName="@Cnumber",Value=cn.Cnumber,DbType= DbType.String },
+                new SqlParameter{ ParameterName="@Cnumber",Value="20210309",DbType= DbType.String },
                 new SqlParameter{ ParameterName="@Ctype",Value="实名",DbType= DbType.String },
                 new SqlParameter{ ParameterName="@Crole",Value=cn.Crole,DbType= DbType.String },
                 new SqlParameter{ ParameterName="@Cname",Value=cn.Cname,DbType= DbType.String },
@@ -120,18 +120,18 @@ namespace DAL
             string strSql = $"insert into Complain values(@Cnumber,@Ctype,@Crole,@Cname,@Cphone,@WeChat,@Cemail,@ComplainPerson,@Caccessory,@Cstate,@ComplainTime,@CdisposePerson)";
             SqlParameter[] para = new SqlParameter[]
             {
-                new SqlParameter{ ParameterName="@Cnumber",Value=cn.Cnumber,DbType= DbType.String },
-                new SqlParameter{ ParameterName="@Ctype",Value=cn.Ctype,DbType= DbType.String },
-                new SqlParameter{ ParameterName="@Crole",Value=cn.Crole,DbType= DbType.String },
-                new SqlParameter{ ParameterName="@Cname",Value=cn.Cname,DbType= DbType.String },
-                new SqlParameter{ ParameterName="@Cphone",Value=cn.Cphone,DbType= DbType.String },
-                new SqlParameter{ ParameterName="@WeChat",Value=cn.WeChat,DbType= DbType.String },
-                new SqlParameter{ ParameterName="@Cemail",Value=cn.Cemail,DbType= DbType.String },
-                new SqlParameter{ ParameterName="@ComplainPerson",Value=cn.ComplainPerson,DbType= DbType.String },
+                new SqlParameter{ ParameterName="@Cnumber",Value="***",DbType= DbType.String },
+                new SqlParameter{ ParameterName="@Ctype",Value="匿名",DbType= DbType.String },
+                new SqlParameter{ ParameterName="@Crole",Value="***",DbType= DbType.String },
+                new SqlParameter{ ParameterName="@Cname",Value="***",DbType= DbType.String },
+                new SqlParameter{ ParameterName="@Cphone",Value="***",DbType= DbType.String },
+                new SqlParameter{ ParameterName="@WeChat",Value="***",DbType= DbType.String },
+                new SqlParameter{ ParameterName="@Cemail",Value="***",DbType= DbType.String },
+                new SqlParameter{ ParameterName="@ComplainPerson",Value="***",DbType= DbType.String },
                 new SqlParameter{ ParameterName="@Caccessory",Value=cn.Caccessory,DbType= DbType.String },
-                new SqlParameter{ ParameterName="@Cstate",Value=cn.Cstate,DbType= DbType.Boolean },
-                new SqlParameter{ ParameterName="@ComplainTime",Value=cn.ComplainTime,DbType= DbType.DateTime },
-                new SqlParameter{ ParameterName="@CdisposePerson",Value=cn.CdisposePerson,DbType= DbType.String },
+                new SqlParameter{ ParameterName="@Cstate",Value=1,DbType= DbType.Boolean },
+                new SqlParameter{ ParameterName="@ComplainTime",Value=DateTime.Now,DbType= DbType.DateTime },
+                new SqlParameter{ ParameterName="@CdisposePerson",Value="超级管理员",DbType= DbType.String },
         };
             return NewDBHelper.ExecuteNonQuery(strSql, CommandType.Text, para);
         }

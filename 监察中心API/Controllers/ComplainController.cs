@@ -50,6 +50,12 @@ namespace 监察中心API.Controllers
             int i = cndal.AddComplains_autonym(cn);
             return i;
         }
-
+        //添加投诉举报信息_匿名
+        [HttpPost]
+        public int AddComplains_anonymity(Complain cn)
+        {
+            int i = cndal.AddComplains_anonymity(cn);
+            return i;
+        }
     }
 }
