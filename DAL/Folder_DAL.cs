@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using MODEL;
+using Newtonsoft.Json;
 
 namespace DAL
 {
@@ -12,18 +15,23 @@ namespace DAL
         /// <param name="folname"></param>
         /// <param name="status"></param>
         /// <returns></returns>
-        public List<Folder> GetFolders(string folname, int status, int page, int limit)
+        public List<Folder> GetFolders(string folname, int status, int page, int limit, out int total)
         {
-            string sql = $"select * from Folder where 1=1";
-            if (!string.IsNullOrEmpty(folname))
-            {
-                sql += $" and Name like '%{folname}%' ";
-            }
-            if (status != 0)
-            {
-                sql += $" and Status = '{status}' ";
-            }
-            return NewDBHelper.GetList<Folder>(sql);
+            SqlParameter[] paras =
+                {
+                new SqlParameter("@pageIndex",page),
+                new SqlParameter("@PageSize",limit),
+                new SqlParameter("@folname",folname),
+                new SqlParameter("@status",status),
+                new SqlParameter("@TotalCount",SqlDbType.Int),
+            };
+            paras[4].Direction = ParameterDirection.Output;
+            DataTable dt = NewDBHelper.GetTable("p_folder", CommandType.StoredProcedure, paras);
+
+            total = Convert.ToInt32(paras[4].Value);
+            string json = JsonConvert.SerializeObject(dt);
+            var list = JsonConvert.DeserializeObject<List<Folder>>(json);
+            return list;
         }
 
         /// <summary>

@@ -20,7 +20,7 @@ namespace 监察中心API.Controllers
         [HttpGet]
         [EnableCors("any")]
         //调用dal层显示方法
-        public ObjectResult GetArticles(int page,int limit,int artname=0, string folname="", int status=0)
+        public ObjectResult GetArticles(int page=1,int limit=3,int artname=0, string folname="", int status=0)
         {
             int total;
             var data = dal.GetArticles(artname, folname, status,page,limit,out total);
