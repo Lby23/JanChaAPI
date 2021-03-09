@@ -52,6 +52,7 @@ namespace 监察中心API.Controllers
         [EnableCors("any")]
         public int Add(FolderImg f)
         {
+            f.CreateTime = DateTime.Now;
             var code = folderimg.Add(f);
             return code == 1 ? 1 : 0;
         }
