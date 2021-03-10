@@ -24,7 +24,7 @@ namespace 监察中心API.Controllers
         /// <returns></returns>
         [HttpGet]
         [EnableCors("any")]
-        public ObjectResult Index(int page , int limit , int status)
+        public ObjectResult Index(int status,int page=1 , int limit=3 )
         {
             int total;
             var data = folderimg.GetFolderImgs(status, page, limit,out total);

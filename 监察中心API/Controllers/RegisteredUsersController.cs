@@ -18,7 +18,7 @@ namespace 监察中心API.Controllers
 
         [HttpGet]
         [EnableCors("any")]
-        public ObjectResult GetUsers(int page, int limit, string UserName=null, string Number=null)//显示注册的人员和查找人员
+        public ObjectResult GetUsers(int page=1, int limit=5, string UserName=null, string Number=null)//显示注册的人员和查找人员
         {
             int total;
             var str= dal.GetUsers(page, limit,UserName,Number,out total);
