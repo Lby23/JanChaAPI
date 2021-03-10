@@ -11,20 +11,18 @@ using System.Text.Json;
 namespace 监察中心API.Controllers
 {
     //投诉管理
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ComplainController : ControllerBase
     {
         ComplainDAL cndal = new ComplainDAL();
 
         [HttpGet]
-        public string GetComplain(int page,int limit,string CName = null)
+        public ObjectResult GetComplain(int page,int limit,string CName = null)
         {
-            List<Complain> data = cndal.GetComplains(CName);
-            int count = data.Count;
-            data = data.Skip((page - 1) * limit).Take(limit).ToList();
-            var json = JsonSerializer.Serialize(new { data = data, code = 0, count = count });
-            return json;
+            int total;
+            List<Complain> data = cndal.GetComplains_page(page, limit, out total, CName);
+            return Ok(new { data = data, code = 0, count = total });
         }
         [HttpPost]
         public int AddComplain(Complain cn)
@@ -42,6 +40,21 @@ namespace 监察中心API.Controllers
         public int PutComplain(Complain cn)
         {
             int i = cndal.UpdateComplains(cn);
+            return i;
+        }
+
+        //添加投诉举报信息_实名
+        [HttpPost]
+        public int AddComplains_autonym(Complain cn)
+        {
+            int i = cndal.AddComplains_autonym(cn);
+            return i;
+        }
+        //添加投诉举报信息_匿名
+        [HttpPost]
+        public int AddComplains_anonymity(Complain cn)
+        {
+            int i = cndal.AddComplains_anonymity(cn);
             return i;
         }
     }

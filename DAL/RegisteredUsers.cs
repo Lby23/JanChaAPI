@@ -37,7 +37,7 @@ namespace DAL
             SqlParameter[] a={ 
             new SqlParameter {ParameterName="@UId",DbType=DbType.Int32,Value=UId}
             };
-            return NewDBHelper.GetList<User>(sql,CommandType.StoredProcedure,a);
+            return NewDBHelper.GetList<User>(sql,CommandType.Text,a);
         }
         public int Delete(int UId)//删除
         {
@@ -45,7 +45,7 @@ namespace DAL
             SqlParameter[] a = { 
             new SqlParameter{ ParameterName="@UId",DbType=DbType.Int32,Value=UId},
             };
-            return NewDBHelper.ExecuteNonQuery(sql,CommandType.StoredProcedure,a);
+            return NewDBHelper.ExecuteNonQuery(sql,CommandType.Text,a);
         }
         public int Enlt(User u)//修改
         {

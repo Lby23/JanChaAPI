@@ -10,19 +10,23 @@ using System.Text.Json;
 
 namespace 监察中心API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class RecruitController : ControllerBase
     {
         RecruitDAL rcdal = new RecruitDAL();
         [HttpGet]
-        public string GetRecruits(string RPosition,int page,int limit)
+        public ObjectResult GetRecruits(int page, int limit, string RPosition = null)
         {
-            List<Recruit> data = rcdal.GetRecruits(RPosition);
-            int count = data.Count();
-            data = data.Skip((page - 1) * limit).Take(limit).ToList();
-            var json = JsonSerializer.Serialize(new { data = data, code = 0, count = count });
-            return json;
+            int total;
+            List<Recruit> data = rcdal.GetRecruits_page(page, limit, out total, RPosition);
+            return Ok(new { data = data, code = 0, count = total });
+        }
+        [HttpGet]
+        public List<Recruit> GetRecruits_RTYPE(string Rtype)
+        {
+            List<Recruit> data = rcdal.GetRecruitsType(Rtype);
+            return data;
         }
         [HttpPost]
         public int AddRecruits(Recruit rc)

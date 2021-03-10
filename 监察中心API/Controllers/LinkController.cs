@@ -18,10 +18,10 @@ namespace 监察中心API.Controllers
         [HttpGet]
         public ObjectResult GetLinks(int page, int limit, string URL = null)
         {
-            List<Link> St = dl.GetLink(page, limit, URL);
-            int total = dl.GetLink(page, limit, URL).Count();
-            St = St.Skip((page - 1) * limit).Take(limit).ToList();
-            return Ok(new { code = 0, msg = "", count = total, data = St });
+            int tol;
+
+            List<Link> St = dl.GetLink(page, limit,out tol, URL);
+            return Ok(new { code = 0, msg = "", count = tol, data = St });
         }
         [Route("delete")]
         [HttpDelete]

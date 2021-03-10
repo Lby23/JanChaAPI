@@ -20,10 +20,10 @@ namespace 监察中心API.Controllers
         [HttpGet]
         public ObjectResult GetAction(int page, int limit, string title = null)
         {
-            List<Questionnaire> St = dl.GetQuestionnaires(page, limit, title);
-            int total = dl.GetQuestionnaires(page, limit, title).Count();
-            St = St.Skip((page - 1) * limit).Take(limit).ToList();
-            return Ok(new { code = 0, msg = "", count = total, data = St});
+            int tol;
+
+            List<Questionnaire> St = dl.GetQuestionnaires(page, limit, out tol, title);
+            return Ok(new { code = 0, msg = "", count = tol, data = St });
         }
         [Route("delete")]
         [HttpDelete]
@@ -43,6 +43,58 @@ namespace 监察中心API.Controllers
         public int Edit(Questionnaire s)
         {
             return dl.QuestionnaireEdit(s);
+        }
+
+        [HttpPost]
+        [Route("topic")]
+        public int AddTop(Topic s)
+        {
+            return dl.AddTopic(s);
+        }
+
+        [HttpPost]
+        [Route("option")]
+        public int AddOpt(Options s)
+        {
+            return dl.AddOption(s);
+        }
+
+        [HttpGet]
+        [Route("topic")]
+        public ObjectResult GetTop(int id)
+        {
+            List<Topic> data = dl.GetTopics(id);
+
+            int tal = data.Count;
+
+            return Ok(new { code = 0, msg = "", count = tal, data = data });
+        }
+        [Route("topic1")]
+        [HttpGet]
+        public List<Topic> GETTop1()
+        {
+            return dl.GetTopicsCx();
+        }
+        [Route("option1")]
+        [HttpGet]
+        public List<Options> GetOptions1()
+        {
+            return dl.GetOptionsCx();
+        }
+
+        [Route("subon")]
+        [HttpPost]
+        public int AddSpion(SubmitOption s)
+        {
+            return dl.AddSOption(s);
+        }
+
+        [Route("up")]
+        [HttpPost]
+
+        public int Updatequ(int id)
+        {
+            return dl.UpdateQes(id);
         }
     }
 }

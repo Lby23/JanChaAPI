@@ -27,7 +27,7 @@ namespace 监察中心API.Controllers
         public ObjectResult Index(int status,int page=1 , int limit=3 )
         {
             int total;
-            var data = folderimg.GetFolderImgs(status, page, limit,out total);
+            var data = folderimg.GetFolderImgs(status, page, limit, out total);
             return Ok(new { data = data, code = 0, count = total });
         }
 
@@ -52,6 +52,7 @@ namespace 监察中心API.Controllers
         [EnableCors("any")]
         public int Add(FolderImg f)
         {
+            f.CreateTime = DateTime.Now;
             var code = folderimg.Add(f);
             return code == 1 ? 1 : 0;
         }
