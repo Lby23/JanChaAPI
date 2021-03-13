@@ -25,5 +25,9 @@ namespace MODEL
 
         public virtual ICollection<Article> Articles { get; set; }
         public virtual ICollection<FolderImg> FolderImgs { get; set; }
+
+
+        public string title { get { return Name; } }//节点名称
+        public List<Folder> children { get; set; }//子节点结合
     }
 }

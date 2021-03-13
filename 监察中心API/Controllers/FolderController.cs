@@ -92,5 +92,18 @@ namespace 监察中心API.Controllers
             var code = folder.GetId(id);
             return code;
         }
+
+        /// <summary>
+        /// 树Tree
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [EnableCors("any")]
+        public ObjectResult LoadTree()
+        {
+            var list = folder.GetTreeData();
+            return Ok(new { data = list });
+        }
+
     }
 }
