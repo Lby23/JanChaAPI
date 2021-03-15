@@ -87,5 +87,60 @@ namespace DAL
             string sql = $"select * from Folder where Id ={id}";
             return NewDBHelper.GetList<Folder>(sql);
         }
+
+        /// <summary>
+        /// 查询根目录
+        /// </summary>
+        /// <returns></returns>
+        public List<Folder> TreeFolder()
+        {
+            string sql = $"select * from Folder where pId = 0";
+            return NewDBHelper.GetList<Folder>(sql);
+        }
+
+        /// <summary>
+        /// 查询子目录
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<Folder> GetFolderById(int id)
+        {
+            string sql = $"select * from Folder where pId = {id}";
+            return NewDBHelper.GetList<Folder>(sql);
+        }
+
+
+
+        #region 树tree
+        //查询
+        public List<Folder> GetTreeData()
+        {
+            //加载第一层
+            var list = TreeFolder();
+            //加载子节点
+            foreach (var item in list)
+            {
+                //调用递归方法
+                item.children = GetTreeDataRec(item.Id);
+            }
+
+            return list;
+        }
+
+        //递归加载树
+        public List<Folder> GetTreeDataRec(int id)
+        {
+            var list = GetFolderById(id);
+            //加载孙节点
+            foreach (var citem in list)
+            {
+                citem.children = GetTreeDataRec(citem.Id);
+            }
+
+            return list;
+        } 
+        #endregion
+
+
     }
 }
