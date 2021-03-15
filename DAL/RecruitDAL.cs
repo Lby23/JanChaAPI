@@ -64,7 +64,7 @@ namespace DAL
         }
         public int UpdateRecruits(Recruit rc)
         {
-            string strSql = $"update Recruit set RType=@Rtype,RPosition=@Rposition,RPositionDescride=@RpositionDescride,RLocation=@Rlocation,RCompany=@Rcompany,RState=@Rstate,RTime=@Rtime,RPerson=@Rperson where RId=@Rid'";
+            string strSql = $"update Recruit set RType=@Rtype,RPosition=@Rposition,RPositionDescride=@RpositionDescride,RLocation=@Rlocation,RCompany=@Rcompany,RState=@Rstate,RTime=@Rtime,RPerson=@Rperson where RId=@Rid";
             SqlParameter[] para = new SqlParameter[]
              {
                 new SqlParameter{ ParameterName="@Rtype",Value=rc.Rtype,DbType= DbType.String },
