@@ -93,17 +93,17 @@ namespace 监察中心API.Controllers
             return code;
         }
 
-        /// <summary>
-        /// 树Tree
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [EnableCors("any")]
-        public ObjectResult LoadTree()
-        {
-            var list = folder.GetTreeData();
-            return Ok(new { data = list });
-        }
+        ///// <summary>
+        ///// 树Tree
+        ///// </summary>
+        ///// <returns></returns>
+        //[HttpGet]
+        //[EnableCors("any")]
+        //public ObjectResult LoadTree()
+        //{
+        //    var list = folder.GetTreeData();
+        //    return Ok(new { data = list });
+        //}
 
     }
 }
